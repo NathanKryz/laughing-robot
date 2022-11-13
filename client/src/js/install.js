@@ -11,8 +11,7 @@ window.addEventListener('beforeinstallprompt', (event) => {
 // When they click the install button, prompt the user
 // If they wish to install the app with a yes/no,
 // On yes, execute the install, on no, go back to listening
-butInstall.addEventListener('click', async (event) => {
-    event.preventDefault();
+butInstall.addEventListener('click', async () => {
     console.log("Attempting to install app");
     const promptEvent = window.deferredPrompt;
 
@@ -20,7 +19,6 @@ butInstall.addEventListener('click', async (event) => {
         return;
     }
     promptEvent.prompt();
-    const {outcome} = await promptEvent.userChoice;
     window.deferredPrompt = null;
     butInstall.classList.toggle('hidden', true);
 });

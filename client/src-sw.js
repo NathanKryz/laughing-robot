@@ -28,7 +28,8 @@ warmStrategyCache({
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// TODO: Implement asset caching
+// Searches for the request to include either the style, scripts, or service worker
+// Then creates them into an asset-cache for later use.
 registerRoute(
     ({ request }) => ['style', 'script', 'worker'].includes(request.destination),
     new StaleWhileRevalidate({

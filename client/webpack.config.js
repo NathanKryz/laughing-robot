@@ -3,8 +3,7 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
+
 
 module.exports = () => {
   return {
@@ -17,19 +16,22 @@ module.exports = () => {
       filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'dist'),
     },
+    // Set the name and the title of the index file for the PWA
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'JEST'
+        title: 'JATE'
       }),
+      // Reference to the Manifest in the src-sw.js file
       new InjectManifest({
         swSrc: './src-sw.js',
         swDest: 'src-sw.js',
       }),
+      // Create the webpack manifest for downloads. Its purple because I said so.
       new WebpackPwaManifest ({
         fingerprints: false,
         inject: true,
-        name: 'JEST',
+        name: 'JATE',
         description: 'Just another text editor.',
         background_color: '#9222C3',
         theme_color: '#9222C3',
@@ -43,7 +45,7 @@ module.exports = () => {
           },
           {
           src: path.resolve('./favicon.ico'),
-          sizes: [96],
+          sizes: [48],
           destination: path.join('assets', 'icons'),
           },
         ],
@@ -52,11 +54,13 @@ module.exports = () => {
 
     module: {
       rules: [
+        // Regex for checking for a .css stylesheet
         {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
         },
         {
+          // regex to check for the babel-loader
           test: /\.m?js$/,
           exclude: /node_modules/,
           use: {

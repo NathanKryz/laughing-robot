@@ -20,7 +20,7 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'JATE'
+        title: 'JEST',
       }),
       // Reference to the Manifest in the src-sw.js file
       new InjectManifest({
@@ -31,7 +31,7 @@ module.exports = () => {
       new WebpackPwaManifest ({
         fingerprints: false,
         inject: true,
-        name: 'JATE',
+        name: 'JEST',
         description: 'Just another text editor.',
         background_color: '#9222C3',
         theme_color: '#9222C3',
